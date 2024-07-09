@@ -1,0 +1,23 @@
+name: Workflow A
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_job1:
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  job1:
+    if: inputs.skip_job1 != 'true'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Echo
+        run: echo 'Job1 done.'
+
+  job2:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Echo
+        run: echo 'Job2 done.'
