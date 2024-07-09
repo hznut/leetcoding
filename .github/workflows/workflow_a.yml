@@ -10,7 +10,7 @@ on:
 
 jobs:
   wf_a_job1:
-    if: inputs.skip_job1 != 'true'
+    if: ${{ github.events.inputs.skip_job1 != 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Echo
