@@ -10,17 +10,25 @@ on:
 
 jobs:
   wf_a_job1:
-    if: ${{ ! inputs.skip_job1 }}
+    # if: ${{ ! inputs.skip_job1 }}
     runs-on: ubuntu-20.04
     steps:
       - name: Echo
+        if: ${{ ! inputs.skip_job1 }}
         run: echo 'Job1 done.'
 
   wf_a_job2:
     runs-on: ubuntu-20.04
-    needs:
-      - wf_a_job1
-    if: ${{ inputs.skip_job1 || success() }}
     steps:
       - name: Echo
         run: echo 'Job2 done.'
+
+  wf_a_job3:
+    runs-on: ubuntu-20.04
+    needs:
+      - wf_a_job1
+      - wf_a_job2
+    # if: ${{ inputs.skip_job1 || success() }}
+    steps:
+      - name: Echo
+        run: echo 'Job3 done.'
